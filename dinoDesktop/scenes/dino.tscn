@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bchimt37lqwtg"]
+
+[ext_resource type="Texture2D" uid="uid://dhtc3yrquvyw" path="res://assets/dinos/DinoSprites - tard.png" id="1_j5dwh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s6ie"]
+atlas = ExtResource("1_j5dwh")
+region = Rect2(4, 4, 15, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j5dwh"]
+size = Vector2(7, 13)
+
+[node name="Dino" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_4s6ie")
+
+[node name="Default Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_j5dwh")
