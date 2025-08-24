@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bswjo83bmaaoh"]
+
+[ext_resource type="Script" uid="uid://dvhxnd4f6cfmv" path="res://scripts/cursor.gd" id="1_s0nli"]
+[ext_resource type="Texture2D" uid="uid://bfw06uiyleva0" path="res://icon.svg" id="2_ndevg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fc0e3"]
+
+[node name="Cursor" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+priority = 1
+script = ExtResource("1_s0nli")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_fc0e3")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ndevg")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
