@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bchimt37lqwtg"]
+[gd_scene load_steps=34 format=3 uid="uid://bchimt37lqwtg"]
 
 [ext_resource type="Script" uid="uid://dfhbov27jbq0r" path="res://scenes/dino.gd" id="1_4s6ie"]
 [ext_resource type="Texture2D" uid="uid://dhtc3yrquvyw" path="res://assets/dinos/DinoSprites - tard.png" id="1_j5dwh"]
@@ -37,7 +37,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 1.5)]
+"values": [Vector2(3, 1.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -173,7 +173,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_qwydg"]
 resource_name = "Jump"
-length = 0.2
+length = 0.1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -329,15 +329,165 @@ tracks/3/keys = {
 "values": [Vector2(0.5, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_mdm24"]
+resource_name = "Crouch Jump"
+length = 0.001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture:region")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Rect2(438, 6, 18, 13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Default Collision:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 0.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Default Collision:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 4.5)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ybb2o"]
 _data = {
 &"Crouch": SubResource("Animation_focm0"),
+&"Crouch Jump": SubResource("Animation_mdm24"),
 &"Hurt": SubResource("Animation_7mjhv"),
 &"Idle": SubResource("Animation_ybb2o"),
 &"Jump": SubResource("Animation_qwydg"),
 &"RESET": SubResource("Animation_4s6ie"),
 &"Run": SubResource("Animation_j5dwh")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mdm24"]
+animation = &"Crouch Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4s6ie"]
+animation = &"Crouch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ybb2o"]
+animation = &"Hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qwydg"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mjhv"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_focm0"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mdm24"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u8i2d"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4s6ie"]
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ybb2o"]
+break_loop_at_end = true
+advance_mode = 2
+advance_expression = "velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwydg"]
+reset = false
+advance_mode = 2
+advance_expression = "crouch"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_focm0"]
+reset = false
+advance_mode = 2
+advance_expression = "!crouch"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwosw"]
+break_loop_at_end = true
+advance_mode = 2
+advance_expression = "!velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x81ab"]
+advance_mode = 2
+advance_condition = &"hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i6h6m"]
+advance_mode = 2
+advance_condition = &"hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xq1gb"]
+advance_mode = 2
+advance_condition = &"hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x4lh8"]
+break_loop_at_end = true
+advance_mode = 2
+advance_expression = "velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lffyj"]
+break_loop_at_end = true
+advance_mode = 2
+advance_expression = "!velocity"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4hewp"]
+break_loop_at_end = true
+advance_mode = 2
+advance_expression = "!crouch"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_05woy"]
+break_loop_at_end = true
+advance_mode = 2
+advance_expression = "crouch"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qwosw"]
+states/Crouch/node = SubResource("AnimationNodeAnimation_4s6ie")
+states/Crouch/position = Vector2(550.5, 180)
+"states/Crouch Jump/node" = SubResource("AnimationNodeAnimation_mdm24")
+"states/Crouch Jump/position" = Vector2(725.605, 158.9)
+states/End/position = Vector2(1118.5, 93.25)
+states/Hurt/node = SubResource("AnimationNodeAnimation_ybb2o")
+states/Hurt/position = Vector2(855, 246.25)
+states/Idle/node = SubResource("AnimationNodeAnimation_qwydg")
+states/Idle/position = Vector2(373.5, 82.6875)
+states/Jump/node = SubResource("AnimationNodeAnimation_7mjhv")
+states/Jump/position = Vector2(774.5, 53.5)
+states/Run/node = SubResource("AnimationNodeAnimation_focm0")
+states/Run/position = Vector2(540, 82.5938)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_mdm24"), "Hurt", "End", SubResource("AnimationNodeStateMachineTransition_u8i2d"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_4s6ie"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_ybb2o"), "Run", "Crouch", SubResource("AnimationNodeStateMachineTransition_qwydg"), "Crouch", "Run", SubResource("AnimationNodeStateMachineTransition_focm0"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_qwosw"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_x81ab"), "Jump", "Hurt", SubResource("AnimationNodeStateMachineTransition_i6h6m"), "Crouch", "Hurt", SubResource("AnimationNodeStateMachineTransition_xq1gb"), "Crouch", "Crouch Jump", SubResource("AnimationNodeStateMachineTransition_x4lh8"), "Crouch Jump", "Crouch", SubResource("AnimationNodeStateMachineTransition_lffyj"), "Crouch Jump", "Jump", SubResource("AnimationNodeStateMachineTransition_4hewp"), "Jump", "Crouch Jump", SubResource("AnimationNodeStateMachineTransition_05woy")]
+graph_offset = Vector2(53.7001, 138.988)
 
 [node name="Dino" type="CharacterBody2D"]
 z_index = 5
@@ -356,3 +506,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_ybb2o")
 }
 autoplay = "Idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_qwosw")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/hurt = false
+parameters/conditions/run = false
