@@ -313,7 +313,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
 
-[node name="Game" type="Control" node_paths=PackedStringArray("dino", "dinoButton")]
+[node name="Game" type="Control" node_paths=PackedStringArray("dino")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -322,7 +322,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_e2o6t")
 dino = NodePath("Gameplay/Dino/Dino")
-dinoButton = NodePath("")
 
 [node name="Gameplay" type="Control" parent="."]
 layout_mode = 1
@@ -357,3 +356,4 @@ tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 5, 0, 6, 0, 0, 0, 1, 0, 
 tile_set = SubResource("TileSet_7jktm")
 
 [node name="Cursor" parent="." instance=ExtResource("6_eow3j")]
+unique_name_in_owner = true

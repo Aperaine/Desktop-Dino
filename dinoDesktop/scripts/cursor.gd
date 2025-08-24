@@ -1,5 +1,5 @@
 extends Area2D
-var colliding:bool = false
+@export var colliding:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,9 +17,9 @@ func _process(_delta: float) -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	colliding = true
-	print(colliding)
+	#print(colliding)
 
 
 func _on_area_exited(_area: Area2D) -> void:
 	colliding = false
-	print(colliding)
+	#print(colliding)
