@@ -12,21 +12,6 @@ var projectRes := Vector2(1152,648)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print(dinoButton.position)
-	
-	var temp: Vector2 = dinoButton.position
-	temp.x *= DisplayServer.window_get_size().x / projectRes.x
-	temp.y *= DisplayServer.window_get_size().y / projectRes.y
-	temp.y += dinoButton.size.y*2
-	print(DisplayServer.window_get_size())
-	print(DisplayServer.screen_get_size())
-	dinoButton.position = temp
-	print(dinoButton.position)
-	
-	dinoButton.size.x  *= DisplayServer.window_get_size().x / projectRes.x
-	dinoButton.size.y *= DisplayServer.window_get_size().y / projectRes.y
-	
-	get_window().mouse_passthrough = true
 	
 	set_process(false)
 

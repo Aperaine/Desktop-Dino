@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://cooikcw0lvux7"]
+[gd_scene load_steps=11 format=3 uid="uid://cooikcw0lvux7"]
 
 [ext_resource type="Script" uid="uid://cqfdpbu7hrr8n" path="res://scripts/game.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://nbk8rhfnm8pi" path="res://scenes/ground.tscn" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bchimt37lqwtg" path="res://scenes/dino.tscn" id="3_feb5d"]
 [ext_resource type="Texture2D" uid="uid://b5sru06so68pq" path="res://assets/Seasonal Tilesets/3 - Tropics/Terrain (16 x 16).png" id="4_fc0e3"]
+[ext_resource type="Script" uid="uid://dvhxnd4f6cfmv" path="res://scripts/cursor.gd" id="5_7jktm"]
+[ext_resource type="Texture2D" uid="uid://bfw06uiyleva0" path="res://icon.svg" id="6_ryrav"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(89, 109)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("4_fc0e3")
@@ -311,6 +316,8 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fc0e3"]
+
 [node name="Game" type="Control" node_paths=PackedStringArray("dino", "dinoButton")]
 layout_mode = 3
 anchors_preset = 15
@@ -347,6 +354,7 @@ scale = Vector2(5, 5)
 transparent_bg = true
 title = "Test"
 position = Vector2i(50, 450)
+visible = false
 transient = true
 unresizable = true
 borderless = true
@@ -363,6 +371,14 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "test"
 
+[node name="Area2D" type="Area2D" parent="Gameplay/Dino"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gameplay/Dino/Area2D"]
+position = Vector2(96.5, -124)
+shape = SubResource("RectangleShape2D_fc0e3")
+
 [node name="Ground" parent="Gameplay" instance=ExtResource("3_fc0e3")]
 position = Vector2(0, 300)
 
@@ -372,4 +388,19 @@ scale = Vector2(5, 5)
 tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 5, 0, 6, 0, 0, 0, 1, 0, 255, 255, 0, 0, 7, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 6, 0, 0, 0, 0, 0, 255, 255, 0, 0, 3, 0, 1, 0, 0, 0)
 tile_set = SubResource("TileSet_7jktm")
 
+[node name="Cursor" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+priority = 1
+script = ExtResource("5_7jktm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
+shape = SubResource("CircleShape2D_fc0e3")
+
+[node name="Icon" type="Sprite2D" parent="Cursor"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_ryrav")
+
 [connection signal="pressed" from="Gameplay/Dino/Window/Button" to="." method="_on_button_pressed"]
+[connection signal="area_entered" from="Cursor" to="Cursor" method="_on_area_entered"]
+[connection signal="area_exited" from="Cursor" to="Cursor" method="_on_area_exited"]
