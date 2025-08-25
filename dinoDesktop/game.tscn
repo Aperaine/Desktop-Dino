@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cooikcw0lvux7"]
+[gd_scene load_steps=10 format=4 uid="uid://cooikcw0lvux7"]
 
 [ext_resource type="Script" uid="uid://cqfdpbu7hrr8n" path="res://scripts/game.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://nbk8rhfnm8pi" path="res://scenes/ground.tscn" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bchimt37lqwtg" path="res://scenes/dino.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://c015ap5pbhg8j" path="res://scenes/clickZone.tscn" id="3_ryrav"]
 [ext_resource type="Texture2D" uid="uid://b5sru06so68pq" path="res://assets/Seasonal Tilesets/3 - Tropics/Terrain (16 x 16).png" id="4_fc0e3"]
+[ext_resource type="Script" uid="uid://dmo7mvr85bies" path="res://scripts/ground.gd" id="5_eow3j"]
 [ext_resource type="PackedScene" uid="uid://bswjo83bmaaoh" path="res://scenes/cursor.tscn" id="6_eow3j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
@@ -346,14 +347,22 @@ scale = Vector2(5, 5)
 
 [node name="Area2D" parent="Gameplay/Dino" instance=ExtResource("3_ryrav")]
 
-[node name="Ground" parent="Gameplay" instance=ExtResource("3_fc0e3")]
-position = Vector2(0, 300)
-
-[node name="Ground2" type="TileMapLayer" parent="Gameplay"]
+[node name="Starting Ground" type="TileMapLayer" parent="Gameplay"]
 z_index = -5
 scale = Vector2(5, 5)
-tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 5, 0, 6, 0, 0, 0, 1, 0, 255, 255, 0, 0, 7, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 6, 0, 0, 0, 0, 0, 255, 255, 0, 0, 3, 0, 1, 0, 0, 0)
+tile_map_data = PackedByteArray("AAABAAAAAAAFAAYAAAABAP//AAAHAAMAAAAAAAAAAAAGAAQAAAAAAP//AAAGAAMAAAD/////AAABAAMAAAD//wAAAAABAAQAAAA=")
 tile_set = SubResource("TileSet_7jktm")
+
+[node name="Ground" type="Node2D" parent="Gameplay"]
+position = Vector2(0, 280)
+script = ExtResource("5_eow3j")
+groundScene = ExtResource("3_fc0e3")
+
+[node name="Ground" parent="Gameplay/Ground" instance=ExtResource("3_fc0e3")]
 
 [node name="Cursor" parent="." instance=ExtResource("6_eow3j")]
 unique_name_in_owner = true
+
+[connection signal="gameStart" from="." to="Gameplay/Ground" method="_on_game_game_start"]
+[connection signal="updateSpeed" from="." to="Gameplay/Ground" method="_on_game_update_speed"]
+[connection signal="nextIteration" from="Gameplay/Ground/Ground" to="Gameplay/Ground" method="_on_ground_next_iteration"]

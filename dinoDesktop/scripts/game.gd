@@ -1,11 +1,13 @@
 extends Control
 
 signal gameStart
+signal updateSpeed(speed:int)
 
 @onready var cursor: Area2D = %Cursor
 
 @export var dino: CharacterBody2D
 @export var started:bool = false
+@export var speed:int = 700
 
 var passthrough : PackedVector2Array
 var projectRes := Vector2(1152,648)
@@ -29,6 +31,7 @@ func _input(event: InputEvent) -> void:
 		if Input.is_action_just_pressed("jump"):
 			started = true
 			emit_signal("gameStart")
+			emit_signal("updateSpeed", speed)
 			print("started")
 			
 			dino.jump()
