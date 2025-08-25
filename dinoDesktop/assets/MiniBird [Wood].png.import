@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2gwdkaaam1jc"
-path="res://.godot/imported/6 - Distant_trees.png-d5cf1adb68c9a5ef9802bc47a00ab7bf.ctex"
+uid="uid://cavml57nkkg7a"
+path="res://.godot/imported/MiniBird [Wood].png-41a3b9ab8dd096cee5f0969c413888be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Seasonal Tilesets/2 - Autumn Forest/Background parts/6 - Distant_trees.png"
-dest_files=["res://.godot/imported/6 - Distant_trees.png-d5cf1adb68c9a5ef9802bc47a00ab7bf.ctex"]
+source_file="res://assets/MiniBird [Wood].png"
+dest_files=["res://.godot/imported/MiniBird [Wood].png-41a3b9ab8dd096cee5f0969c413888be.ctex"]
 
 [params]
 
