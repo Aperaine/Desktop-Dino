@@ -1,13 +1,18 @@
 extends Control
 
 signal gameStart
-signal updateSpeed(speed:int)
+signal updateSpeed(speed:float)
+signal restart
 
 @onready var cursor: Area2D = %Cursor
 
+@export var ground:Node2D
 @export var dino: CharacterBody2D
-@export var started:bool = false
-@export var speed:int = 700
+@export var running:bool = false
+@export var speed:float
+
+
+const STARTINGSPEED:int = 700
 
 var passthrough : PackedVector2Array
 var projectRes := Vector2(1152,648)
@@ -24,17 +29,37 @@ func _process(_delta: float) -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
-	if !cursor.colliding:
-		return
-		
-	elif !started:
+	#actual code
+	if !running:
 		if Input.is_action_just_pressed("jump"):
-			started = true
+			speed = STARTINGSPEED
+			running = true
 			emit_signal("gameStart")
 			emit_signal("updateSpeed", speed)
 			print("started")
 			
 			dino.jump()
-			dino.set_physics_process(true)
+			dino.movementAllowed = true
 	
+	#testing
+	elif Input.is_action_just_pressed("crouch"):
+		gameOver()
+	elif Input.is_action_just_pressed("ui_accept"):
+		newGame()
+
 	
+
+func gameOver():
+	print("gameover")
+	
+	running = true
+	speed = 1
+	ground.set_process(false)
+	dino.death()
+
+func newGame():
+	print("newgame")
+	
+	emit_signal("restart")
+	running = false
+	dino._ready()

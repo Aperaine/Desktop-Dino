@@ -13,7 +13,6 @@ func _process(delta: float) -> void:
 
 
 func nearingEnd() -> void:
-	print("nearningEnd")
 	emit_signal("nextIteration")
 
 

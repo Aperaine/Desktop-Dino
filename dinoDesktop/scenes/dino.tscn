@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bchimt37lqwtg"]
+[gd_scene load_steps=33 format=3 uid="uid://bchimt37lqwtg"]
 
 [ext_resource type="Script" uid="uid://dfhbov27jbq0r" path="res://scenes/dino.gd" id="1_4s6ie"]
 [ext_resource type="Texture2D" uid="uid://dhtc3yrquvyw" path="res://assets/dinos/DinoSprites - tard.png" id="1_j5dwh"]
@@ -415,8 +415,6 @@ animation = &"Run"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mdm24"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u8i2d"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4s6ie"]
 advance_mode = 2
 advance_condition = &"run"
@@ -424,7 +422,7 @@ advance_condition = &"run"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ybb2o"]
 break_loop_at_end = true
 advance_mode = 2
-advance_expression = "velocity"
+advance_expression = "velocity && !crouch"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwydg"]
 reset = false
@@ -439,56 +437,51 @@ advance_expression = "!crouch"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwosw"]
 break_loop_at_end = true
 advance_mode = 2
-advance_expression = "!velocity"
+advance_expression = "!velocity or crouch"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x81ab"]
 advance_mode = 2
-advance_condition = &"hurt"
+advance_expression = "hur"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i6h6m"]
 advance_mode = 2
-advance_condition = &"hurt"
+advance_expression = "hur"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xq1gb"]
 advance_mode = 2
-advance_condition = &"hurt"
+advance_expression = "hurt"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x4lh8"]
 break_loop_at_end = true
 advance_mode = 2
-advance_expression = "velocity"
+advance_expression = "velocity && crouch"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lffyj"]
 break_loop_at_end = true
 advance_mode = 2
-advance_expression = "!velocity"
+advance_expression = "!velocity or !crouch"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4hewp"]
-break_loop_at_end = true
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7mjhv"]
+switch_mode = 2
 advance_mode = 2
-advance_expression = "!crouch"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_05woy"]
-break_loop_at_end = true
-advance_mode = 2
-advance_expression = "crouch"
+advance_expression = "!hurt"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qwosw"]
 states/Crouch/node = SubResource("AnimationNodeAnimation_4s6ie")
-states/Crouch/position = Vector2(550.5, 180)
+states/Crouch/position = Vector2(543.25, 183.5)
 "states/Crouch Jump/node" = SubResource("AnimationNodeAnimation_mdm24")
-"states/Crouch Jump/position" = Vector2(725.605, 158.9)
+"states/Crouch Jump/position" = Vector2(701.605, 238.9)
 states/End/position = Vector2(1118.5, 93.25)
 states/Hurt/node = SubResource("AnimationNodeAnimation_ybb2o")
-states/Hurt/position = Vector2(855, 246.25)
+states/Hurt/position = Vector2(881, 118.75)
 states/Idle/node = SubResource("AnimationNodeAnimation_qwydg")
 states/Idle/position = Vector2(373.5, 82.6875)
 states/Jump/node = SubResource("AnimationNodeAnimation_7mjhv")
-states/Jump/position = Vector2(774.5, 53.5)
+states/Jump/position = Vector2(541.5, -27.5)
 states/Run/node = SubResource("AnimationNodeAnimation_focm0")
-states/Run/position = Vector2(540, 82.5938)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_mdm24"), "Hurt", "End", SubResource("AnimationNodeStateMachineTransition_u8i2d"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_4s6ie"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_ybb2o"), "Run", "Crouch", SubResource("AnimationNodeStateMachineTransition_qwydg"), "Crouch", "Run", SubResource("AnimationNodeStateMachineTransition_focm0"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_qwosw"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_x81ab"), "Jump", "Hurt", SubResource("AnimationNodeStateMachineTransition_i6h6m"), "Crouch", "Hurt", SubResource("AnimationNodeStateMachineTransition_xq1gb"), "Crouch", "Crouch Jump", SubResource("AnimationNodeStateMachineTransition_x4lh8"), "Crouch Jump", "Crouch", SubResource("AnimationNodeStateMachineTransition_lffyj"), "Crouch Jump", "Jump", SubResource("AnimationNodeStateMachineTransition_4hewp"), "Jump", "Crouch Jump", SubResource("AnimationNodeStateMachineTransition_05woy")]
-graph_offset = Vector2(53.7001, 138.988)
+states/Run/position = Vector2(542.375, 82.6407)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_mdm24"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_4s6ie"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_ybb2o"), "Run", "Crouch", SubResource("AnimationNodeStateMachineTransition_qwydg"), "Crouch", "Run", SubResource("AnimationNodeStateMachineTransition_focm0"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_qwosw"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_x81ab"), "Jump", "Hurt", SubResource("AnimationNodeStateMachineTransition_i6h6m"), "Crouch", "Hurt", SubResource("AnimationNodeStateMachineTransition_xq1gb"), "Crouch", "Crouch Jump", SubResource("AnimationNodeStateMachineTransition_x4lh8"), "Crouch Jump", "Crouch", SubResource("AnimationNodeStateMachineTransition_lffyj"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_7mjhv")]
+graph_offset = Vector2(194.046, -16.4869)
 
 [node name="Dino" type="CharacterBody2D"]
 z_index = 5
@@ -512,7 +505,6 @@ autoplay = "Idle"
 tree_root = SubResource("AnimationNodeStateMachine_qwosw")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
-parameters/conditions/hurt = false
 parameters/conditions/run = false
 
 [node name="Area2D" parent="." instance=ExtResource("3_ybb2o")]
