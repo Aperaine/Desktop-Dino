@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Dino Desktop"
+config/name="Desktop Dino"
 run/main_scene="uid://cooikcw0lvux7"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
