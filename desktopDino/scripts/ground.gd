@@ -11,6 +11,7 @@ var groundWidth:int = 17840
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_process(false)
+	SignalBus.connect("updateSpeed",_on_game_update_speed)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

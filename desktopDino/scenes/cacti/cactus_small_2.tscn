@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://g4sfrw7vp1cq"]
+
+[ext_resource type="Texture2D" uid="uid://bsuan2003gtob" path="res://assets/pixel_cactus.png" id="1_e0sro"]
+[ext_resource type="Script" uid="uid://de28sjvun3u1q" path="res://scripts/killzone.gd" id="1_mrc8a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5l63"]
+size = Vector2(14, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77gpi"]
+atlas = ExtResource("1_e0sro")
+region = Rect2(0, 16, 16, 16)
+
+[node name="CactusSmall1" type="Area2D"]
+scale = Vector2(5, 5)
+collision_mask = 8
+script = ExtResource("1_mrc8a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.96046e-08, 0)
+shape = SubResource("RectangleShape2D_s5l63")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.98023e-08, 0)
+texture = SubResource("AtlasTexture_77gpi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

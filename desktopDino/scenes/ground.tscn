@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://nbk8rhfnm8pi"]
+[gd_scene load_steps=16 format=4 uid="uid://nbk8rhfnm8pi"]
 
 [ext_resource type="Texture2D" uid="uid://b5sru06so68pq" path="res://assets/Seasonal Tilesets/3 - Tropics/Terrain (16 x 16).png" id="1_1ywih"]
 [ext_resource type="Script" uid="uid://oo5vnyde08q8" path="res://scripts/groundInstance.gd" id="1_ct7o8"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://0a4atblwl4ou" path="res://assets/Seasonal Tilesets/5 - Misc. universal tiles/House (112 x 96).png" id="3_vjnaj"]
 [ext_resource type="Texture2D" uid="uid://bt4xw1tu7ed8r" path="res://assets/Seasonal Tilesets/5 - Misc. universal tiles/Metal_Wire_fence (16 x 16).png" id="4_hokwi"]
 [ext_resource type="Texture2D" uid="uid://b7bavhpnvjb6k" path="res://assets/Seasonal Tilesets/5 - Misc. universal tiles/Flowers (16 x 16).png" id="5_6ra5r"]
+[ext_resource type="PackedScene" uid="uid://d00ol44xik3lv" path="res://scenes/cacti/cactus_small_1.tscn" id="7_hokwi"]
+[ext_resource type="PackedScene" uid="uid://cwmoa6cftnvcs" path="res://scenes/cacti/cactus_small_3.tscn" id="8_6ra5r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ywih"]
 texture = ExtResource("1_1ywih")
@@ -459,6 +461,12 @@ tile_set = SubResource("TileSet_eow3j")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(17432, -56)
 scale = Vector2(44.5, 21.6)
+
+[node name="CactusSmall1" parent="." instance=ExtResource("7_hokwi")]
+position = Vector2(928, -120)
+
+[node name="CactusSmall2" parent="." instance=ExtResource("8_6ra5r")]
+position = Vector2(1504, -120)
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="nearingEnd"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="screen_exited"]

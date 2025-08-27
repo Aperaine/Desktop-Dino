@@ -441,7 +441,7 @@ advance_expression = "!velocity or crouch"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x81ab"]
 advance_mode = 2
-advance_expression = "hur"
+advance_expression = "hurt"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i6h6m"]
 advance_mode = 2
@@ -481,10 +481,11 @@ states/Jump/position = Vector2(541.5, -27.5)
 states/Run/node = SubResource("AnimationNodeAnimation_focm0")
 states/Run/position = Vector2(542.375, 82.6407)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_mdm24"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_4s6ie"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_ybb2o"), "Run", "Crouch", SubResource("AnimationNodeStateMachineTransition_qwydg"), "Crouch", "Run", SubResource("AnimationNodeStateMachineTransition_focm0"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_qwosw"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_x81ab"), "Jump", "Hurt", SubResource("AnimationNodeStateMachineTransition_i6h6m"), "Crouch", "Hurt", SubResource("AnimationNodeStateMachineTransition_xq1gb"), "Crouch", "Crouch Jump", SubResource("AnimationNodeStateMachineTransition_x4lh8"), "Crouch Jump", "Crouch", SubResource("AnimationNodeStateMachineTransition_lffyj"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_7mjhv")]
-graph_offset = Vector2(194.046, -16.4869)
+graph_offset = Vector2(398.301, -1.0369)
 
 [node name="Dino" type="CharacterBody2D"]
 z_index = 5
+collision_layer = 9
 platform_floor_layers = 4294901760
 script = ExtResource("1_4s6ie")
 
