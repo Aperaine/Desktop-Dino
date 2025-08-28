@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://g4sfrw7vp1cq"]
+
+[ext_resource type="Texture2D" uid="uid://bsuan2003gtob" path="res://assets/pixel_cactus.png" id="1_e0sro"]
+[ext_resource type="Script" uid="uid://de28sjvun3u1q" path="res://scripts/killzone.gd" id="1_mrc8a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77gpi"]
+atlas = ExtResource("1_e0sro")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5l63"]
+size = Vector2(8, 28.8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yfqi5"]
+radius = 6.55
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaky4"]
+atlas = ExtResource("1_e0sro")
+region = Rect2(0, 0, 16, 16)
+
+[node name="Cactusbig" type="Area2D"]
+scale = Vector2(5, 5)
+collision_mask = 8
+script = ExtResource("1_mrc8a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -16)
+texture = SubResource("AtlasTexture_77gpi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.799999, -14.4)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_s5l63")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(12.65, -8)
+scale = Vector2(1, 1)
+shape = SubResource("CircleShape2D_yfqi5")
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2(-11.2, -19.2)
+polygon = PackedVector2Array(-6.4, -4.8, 6.4, 11.2, 0, -9.6)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(12, -8)
+texture = SubResource("AtlasTexture_iaky4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

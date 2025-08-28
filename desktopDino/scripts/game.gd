@@ -58,10 +58,11 @@ func _input(event: InputEvent) -> void:
 
 func gameOver():
 	print("gameover")
-	
+
 	running = false
 	gameEnded = true
-	speed = 1
+	speed = 0
+	SignalBus.updateSpeed.emit(speed)
 	ground.set_process(false)
 	dino.death()
 	dino.movementAllowed = false

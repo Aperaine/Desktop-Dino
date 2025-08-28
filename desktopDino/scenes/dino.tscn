@@ -1,6 +1,6 @@
 [gd_scene load_steps=33 format=3 uid="uid://bchimt37lqwtg"]
 
-[ext_resource type="Script" uid="uid://dfhbov27jbq0r" path="res://scenes/dino.gd" id="1_4s6ie"]
+[ext_resource type="Script" uid="uid://dfhbov27jbq0r" path="res://scripts/dino.gd" id="1_4s6ie"]
 [ext_resource type="Texture2D" uid="uid://dhtc3yrquvyw" path="res://assets/dinos/DinoSprites - tard.png" id="1_j5dwh"]
 [ext_resource type="PackedScene" uid="uid://c015ap5pbhg8j" path="res://scenes/clickZone.tscn" id="3_ybb2o"]
 

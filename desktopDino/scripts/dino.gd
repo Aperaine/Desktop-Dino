@@ -4,7 +4,9 @@ extends CharacterBody2D
 
 
 const JUMP_VELOCITY = -900
-const GRAVITY_MULTIPLIER = 3
+const GRAVITY_MULTIPLIER = 5
+
+var gravityCurrentMultiplier : int = 0
 
 @export var movementAllowed:=false
 
@@ -21,9 +23,9 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		if velocity.y > 0:
-			velocity += get_gravity() * delta * GRAVITY_MULTIPLIER
+			velocity += get_gravity() * delta * GRAVITY_MULTIPLIER * gravityCurrentMultiplier
 		else:
-			velocity += get_gravity() * delta * 2
+			velocity += get_gravity() * delta * 2.4 * gravityCurrentMultiplier
 	
 	if movementAllowed:
 		movement()
@@ -47,3 +49,5 @@ func movement():
 		jump()
 	
 	crouch = Input.is_action_pressed("crouch")
+	
+	gravityCurrentMultiplier = 5 ** int(crouch)

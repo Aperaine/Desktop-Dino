@@ -4,7 +4,7 @@ extends Node2D
 
 const STARTINGPOS := Vector2(0,280)
 
-@export var speed:float = 50
+@export var speed:float = 0
 var instances:int = 0
 var groundWidth:int = 17840
 
