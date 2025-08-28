@@ -3,16 +3,17 @@ extends CharacterBody2D
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 
-const JUMP_VELOCITY = -600
+const JUMP_VELOCITY = -900
 const GRAVITY_MULTIPLIER = 3
 
 @export var movementAllowed:=false
 
-var crouch := false
-var hurt := false
+@export var crouch := false
+@export var hurt := false
 
 
 func _ready() -> void:
+	set_physics_process(true)
 	hurt = false
 	movementAllowed = false
 
@@ -37,6 +38,7 @@ func jump() -> void:
 func death():
 	animation_tree.set("parameters/conditions/run", false)
 	hurt = true
+	set_physics_process(false)
 
 func movement():
 	
