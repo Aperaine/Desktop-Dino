@@ -1,20 +1,69 @@
 extends RichTextLabel
 
-const pulse := "[pulse freq=5 color=gold ease=1]"
+const pulse := "[pulse freq=10 color=gold ease=1]"
 
-@export var score := 0
+@export var score :float = 0
 @export var high := 0
 
 var scoreEffect = ""
+var config = ConfigFile.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	modulate = Color.TRANSPARENT
+	
+	set_process(true)
+	score = 0
+	config.load("user://scores.cfg")
+	high = config.get_value("scores","high",0)
+	setScore()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	score += 10 * delta
+	if int(score) % 100 < 20 && score >= 100:
+		scoreEffect = pulse
+	else:
+		scoreEffect = ""
+	setScore()
 
 func setScore():
-	text = "[color=gray]HI %h\n[color=white]%e%s" % [str(high),str(score),scoreEffect]
+	var tempText = "[color=gray]HI %s [color=white]%s%s "# % returnStringWithZeroes(high)#,returnStringWithZeroes(score),scoreEffect
+	text = tempText % [returnStringWithZeroes(high),scoreEffect,returnStringWithZeroes(int(score))]
+
+func returnStringWithZeroes(num:int):
+	var numString = str(num)
+	
+	if num < 10:
+		return( "0000" + numString )
+	elif num < 100:
+		return( "000" + numString )
+	elif num < 1000:
+		return ("00" + numString)
+	elif num < 10000:
+		return ("0" + numString)
+	else:
+		return ( numString )
+
+
+func _on_game_start() -> void:
+	var tween = create_tween()
+	tween.tween_property(self,"modulate",Color.WHITE,1)
+
+
+func _on_game_restart() -> void:
+	score = 0
+	set_process(true)
+	
+	var tween = create_tween()
+	tween.tween_property(self,"modulate",Color.TRANSPARENT,0.2)
+
+func updateHigh():
+	if score > high:
+		high = score
+		config.set_value("scores","high",high)
+		config.save("user://scores.cfg")
+		
+		scoreEffect = ""
+		setScore()

@@ -13,7 +13,7 @@
 
 [sub_resource type="Theme" id="Theme_hve3p"]
 default_font = ExtResource("1_vef74")
-default_font_size = 25
+default_font_size = 20
 RichTextLabel/constants/outline_size = 10
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
@@ -322,7 +322,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
 
-[node name="Game" type="Control" node_paths=PackedStringArray("ground", "dino")]
+[node name="Game" type="Control" node_paths=PackedStringArray("ground", "dino", "scoreDisplay")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -333,6 +333,7 @@ theme = SubResource("Theme_hve3p")
 script = ExtResource("1_e2o6t")
 ground = NodePath("Gameplay/Ground")
 dino = NodePath("Gameplay/Dino/Dino")
+scoreDisplay = NodePath("Score")
 
 [node name="Gameplay" type="Control" parent="."]
 layout_mode = 1
@@ -391,10 +392,11 @@ unique_name_in_owner = true
 [node name="Score" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-offset_left = 716.0
+offset_left = 542.0
 offset_top = 10.0
 offset_right = 1167.0
 offset_bottom = 40.0
+grow_horizontal = 0
 bbcode_enabled = true
 text = "[color=gray]HI 00000 [color=white]00000 "
 fit_content = true
@@ -403,6 +405,8 @@ vertical_alignment = 2
 script = ExtResource("10_hve3p")
 
 [connection signal="gameStart" from="." to="Gameplay/Ground" method="_on_game_game_start"]
+[connection signal="gameStart" from="." to="Score" method="_on_game_start"]
 [connection signal="restart" from="." to="Gameplay/Ground" method="_on_game_restart"]
 [connection signal="restart" from="." to="Gameplay/Right Alignment/Cactus Spawner" method="_on_game_restart"]
+[connection signal="restart" from="." to="Score" method="_on_game_restart"]
 [connection signal="nextIteration" from="Gameplay/Ground/Ground" to="Gameplay/Ground" method="_on_ground_next_iteration"]

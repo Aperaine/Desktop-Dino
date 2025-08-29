@@ -10,6 +10,7 @@ signal restart
 @export var running:bool = false
 @export var gameEnded:bool = false
 @export var speed:float
+@export var scoreDisplay:RichTextLabel
 
 
 const STARTINGSPEED:int = 700
@@ -73,6 +74,10 @@ func gameOver():
 	ground.set_process(false)
 	dino.death()
 	dino.movementAllowed = false
+	
+	scoreDisplay.set_process(false)
+	scoreDisplay.updateHigh()
+	
 
 func newGame():
 	print("newgame")
