@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=4 uid="uid://cooikcw0lvux7"]
+[gd_scene load_steps=14 format=4 uid="uid://cooikcw0lvux7"]
 
 [ext_resource type="Script" uid="uid://cqfdpbu7hrr8n" path="res://scripts/game.gd" id="1_e2o6t"]
+[ext_resource type="FontFile" uid="uid://20xyyl321jur" path="res://assets/PressStart2P-Regular.ttf" id="1_vef74"]
 [ext_resource type="PackedScene" uid="uid://nbk8rhfnm8pi" path="res://scenes/ground.tscn" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bchimt37lqwtg" path="res://scenes/dino.tscn" id="3_feb5d"]
 [ext_resource type="PackedScene" uid="uid://c015ap5pbhg8j" path="res://scenes/clickZone.tscn" id="3_ryrav"]
@@ -8,6 +9,12 @@
 [ext_resource type="Script" uid="uid://dmo7mvr85bies" path="res://scripts/ground.gd" id="5_eow3j"]
 [ext_resource type="PackedScene" uid="uid://bswjo83bmaaoh" path="res://scenes/cursor.tscn" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://b1jq3g6matats" path="res://scenes/cactus_spawner.tscn" id="7_j5wjh"]
+[ext_resource type="Script" uid="uid://dirh61ke81wel" path="res://score.gd" id="10_hve3p"]
+
+[sub_resource type="Theme" id="Theme_hve3p"]
+default_font = ExtResource("1_vef74")
+default_font_size = 25
+RichTextLabel/constants/outline_size = 10
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("4_fc0e3")
@@ -322,6 +329,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_hve3p")
 script = ExtResource("1_e2o6t")
 ground = NodePath("Gameplay/Ground")
 dino = NodePath("Gameplay/Dino/Dino")
@@ -379,17 +387,20 @@ position = Vector2(128, -151.5)
 
 [node name="Cursor" parent="." instance=ExtResource("6_eow3j")]
 unique_name_in_owner = true
-visible = false
 
-[node name="ScoreUI" type="BoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -251.0
-offset_bottom = 117.0
-grow_horizontal = 0
-vertical = true
+[node name="Score" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+offset_left = 716.0
+offset_top = 10.0
+offset_right = 1167.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "[color=gray]HI 00000 [color=white]00000 "
+fit_content = true
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("10_hve3p")
 
 [connection signal="gameStart" from="." to="Gameplay/Ground" method="_on_game_game_start"]
 [connection signal="restart" from="." to="Gameplay/Ground" method="_on_game_restart"]

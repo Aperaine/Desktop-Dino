@@ -37,6 +37,10 @@ window/per_pixel_transparency/allowed=true
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
+
 [input]
 
 jump={
