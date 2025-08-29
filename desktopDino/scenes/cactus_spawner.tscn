@@ -12,6 +12,7 @@ position = Vector2(49.5, -40)
 scale = Vector2(5.45, 4.5)
 
 [node name="StartingDelay" type="Timer" parent="."]
+wait_time = 3.0
 one_shot = true
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="screen_exited"]

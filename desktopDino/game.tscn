@@ -322,7 +322,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
 
-[node name="Game" type="Control" node_paths=PackedStringArray("ground", "dino", "scoreDisplay")]
+[node name="Game" type="Control" node_paths=PackedStringArray("ground", "dino", "scoreDisplay", "restartTimer")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -334,6 +334,7 @@ script = ExtResource("1_e2o6t")
 ground = NodePath("Gameplay/Ground")
 dino = NodePath("Gameplay/Dino/Dino")
 scoreDisplay = NodePath("Score")
+restartTimer = NodePath("RestartTimer")
 
 [node name="Gameplay" type="Control" parent="."]
 layout_mode = 1
@@ -404,7 +405,11 @@ horizontal_alignment = 2
 vertical_alignment = 2
 script = ExtResource("10_hve3p")
 
+[node name="RestartTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="gameStart" from="." to="Gameplay/Ground" method="_on_game_game_start"]
+[connection signal="gameStart" from="." to="Gameplay/Right Alignment/Cactus Spawner" method="_on_game_game_start"]
 [connection signal="gameStart" from="." to="Score" method="_on_game_start"]
 [connection signal="restart" from="." to="Gameplay/Ground" method="_on_game_restart"]
 [connection signal="restart" from="." to="Gameplay/Right Alignment/Cactus Spawner" method="_on_game_restart"]

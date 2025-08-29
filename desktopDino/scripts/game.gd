@@ -11,6 +11,7 @@ signal restart
 @export var gameEnded:bool = false
 @export var speed:float
 @export var scoreDisplay:RichTextLabel
+@export var restartTimer:Timer
 
 
 const STARTINGSPEED:int = 700
@@ -44,20 +45,21 @@ func _notification(what: int):
 func _input(event: InputEvent) -> void:
 	#actual code
 	if Input.is_action_just_pressed("jump"):
-		if !running && !gameEnded:
-			speed = STARTINGSPEED
-			running = true
-			emit_signal("gameStart")
-			SignalBus.updateSpeed.emit(speed)
-			print("started")
+		if restartTimer.is_stopped():
+			if !running && !gameEnded:
+				speed = STARTINGSPEED
+				running = true
+				emit_signal("gameStart")
+				SignalBus.updateSpeed.emit(speed)
+				print("started")
+				
+				dino.jump()
+				dino.movementAllowed = true
+				
+				set_process(true)
 			
-			dino.jump()
-			dino.movementAllowed = true
-			
-			set_process(true)
-		
-		elif !running && gameEnded:
-			newGame()
+			elif !running && gameEnded:
+				newGame()
 	
 	#testing
 	#elif Input.is_action_just_pressed("crouch"):
@@ -92,3 +94,5 @@ func newGame():
 	running = false
 	dino._ready()
 	dino.movementAllowed = false
+	
+	restartTimer.start()

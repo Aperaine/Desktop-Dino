@@ -3,15 +3,19 @@ extends Node2D
 @export var dirPath : String
 @export var speed:float = 0
 @export var startingDelay : Timer
+@export var mainSpawner : Node2D
 
 @onready var cactiDirectory = DirAccess.open(dirPath)
 @onready var spawnPosition = position
 
 var cactiArray:Array
+var original:bool
+var move:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	set_process(true)
+	original = self==mainSpawner
+	
 	speed = 0
 	SignalBus.connect("updateSpeed", updateSpeed)
 	
@@ -20,9 +24,6 @@ func _ready() -> void:
 		var resource := load(cactiDirectory.get_current_dir() + "/" + file)
 		cactiArray.append(resource)
 	#print(cactiArray)
-	
-	await startingDelay.timeout
-	spawnCactus()
 
 func spawnCactus():
 	for child in get_children(false):
@@ -41,7 +42,8 @@ func spawnCactus():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.x -= speed * delta
+	if move:
+		position.x -= speed * delta
 
 
 func screen_exited() -> void:
@@ -56,3 +58,12 @@ func _on_game_restart() -> void:
 	for child in get_children(false):
 		if child is Area2D:
 			child.queue_free()
+	move = false
+	position = spawnPosition
+
+
+func _on_game_game_start() -> void:
+	startingDelay.start()
+	await startingDelay.timeout
+	move = true
+	spawnCactus()
