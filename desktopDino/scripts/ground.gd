@@ -2,7 +2,7 @@ extends Node2D
 
 @export var groundScene:PackedScene
 
-const STARTINGPOS := Vector2(0,280)
+const STARTINGPOS := Vector2(0,550)
 
 @export var speed:float = 0
 var instances:int = 0

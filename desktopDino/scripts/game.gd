@@ -33,12 +33,16 @@ func _notification(what: int):
 		print("unfocused")
 		if !running:
 			newGame()
+		else:
+			SignalBus.gameOver.emit()
+			await get_tree().create_timer(0.01).timeout
+			newGame()
 
 
 func _input(event: InputEvent) -> void:
 	#actual code
-	if !running && !gameEnded:
-		if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump"):
+		if !running && !gameEnded:
 			speed = STARTINGSPEED
 			running = true
 			emit_signal("gameStart")
@@ -47,6 +51,9 @@ func _input(event: InputEvent) -> void:
 			
 			dino.jump()
 			dino.movementAllowed = true
+		
+		elif !running && gameEnded:
+			newGame()
 	
 	#testing
 	#elif Input.is_action_just_pressed("crouch"):
