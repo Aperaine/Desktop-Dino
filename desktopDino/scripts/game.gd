@@ -26,8 +26,9 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _process(delta: float) -> void:
+	speed += 5 * delta
+	SignalBus.updateSpeed.emit(speed)
 
 func _notification(what: int):
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
@@ -52,6 +53,8 @@ func _input(event: InputEvent) -> void:
 			
 			dino.jump()
 			dino.movementAllowed = true
+			
+			set_process(true)
 		
 		elif !running && gameEnded:
 			newGame()
@@ -66,10 +69,13 @@ func _input(event: InputEvent) -> void:
 
 func gameOver():
 	print("gameover")
-
+	
+	set_process(false)
+	
 	running = false
 	gameEnded = true
 	speed = 0
+	
 	SignalBus.updateSpeed.emit(speed)
 	ground.set_process(false)
 	dino.death()

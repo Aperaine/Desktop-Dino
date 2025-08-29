@@ -37,7 +37,6 @@ func _on_game_game_start() -> void:
 
 func _on_game_update_speed(sspeed: float) -> void:
 	speed = sspeed
-	print("speedupdated")
 
 
 func _on_ground_next_iteration() -> void:
