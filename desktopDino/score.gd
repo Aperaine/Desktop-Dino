@@ -12,7 +12,7 @@ var config = ConfigFile.new()
 func _ready() -> void:
 	modulate = Color.TRANSPARENT
 	
-	set_process(true)
+	set_process(false)
 	score = 0
 	config.load("user://scores.cfg")
 	high = config.get_value("scores","high",0)
@@ -48,13 +48,14 @@ func returnStringWithZeroes(num:int):
 
 
 func _on_game_start() -> void:
+	set_process(true)
+	
 	var tween = create_tween()
 	tween.tween_property(self,"modulate",Color.WHITE,1)
 
 
 func _on_game_restart() -> void:
 	score = 0
-	set_process(true)
 	
 	var tween = create_tween()
 	tween.tween_property(self,"modulate",Color.TRANSPARENT,0.2)
