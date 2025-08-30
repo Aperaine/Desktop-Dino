@@ -77,9 +77,7 @@ func _on_game_game_start() -> void:
 		move = true
 		spawnCactus()
 	else:
-		print("prewait")
 		await mainSpawner.enteredScreen
-		print("otherscreenentered")
 		move = true
 		spawnCactus()
 

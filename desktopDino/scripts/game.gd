@@ -42,7 +42,7 @@ func _notification(what: int):
 			newGame()
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	#actual code
 	if Input.is_action_just_pressed("jump"):
 		if restartTimer.is_stopped():

@@ -22,11 +22,13 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	score += 10 * delta
-	if int(score) % 100 < 20 && score >= 100:
-		scoreEffect = pulse
+	if int(score) % 100 < 10 && score >= 100:
+		if scoreEffect != pulse:
+			scoreEffect = pulse
+			setScore()
 	else:
 		scoreEffect = ""
-	setScore()
+		setScore()
 
 func setScore():
 	var tempText = "[color=gray]HI %s [color=white]%s%s "# % returnStringWithZeroes(high)#,returnStringWithZeroes(score),scoreEffect
@@ -66,5 +68,5 @@ func updateHigh():
 		config.set_value("scores","high",high)
 		config.save("user://scores.cfg")
 		
-		scoreEffect = ""
-		setScore()
+	scoreEffect = ""
+	setScore()
