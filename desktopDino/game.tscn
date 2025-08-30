@@ -389,7 +389,7 @@ position = Vector2(128, -151.5)
 mainSpawner = NodePath(".")
 
 [node name="Cactus Spawner2" parent="Gameplay/Right Alignment" node_paths=PackedStringArray("mainSpawner") instance=ExtResource("7_j5wjh")]
-position = Vector2(720, -151.5)
+position = Vector2(715, -151)
 mainSpawner = NodePath("../Cactus Spawner")
 
 [node name="Cursor" parent="." instance=ExtResource("6_eow3j")]

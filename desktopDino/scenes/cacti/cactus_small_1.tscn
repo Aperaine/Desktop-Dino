@@ -16,7 +16,7 @@ collision_mask = 8
 script = ExtResource("1_s5l63")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2.98023e-08, -8)
+position = Vector2(-1.77636e-15, -8)
 texture = SubResource("AtlasTexture_77gpi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
