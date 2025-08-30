@@ -1,5 +1,7 @@
 extends Node2D
 
+signal enteredScreen
+
 @export var dirPath : String
 @export var speed:float = 0
 @export var startingDelay : Timer
@@ -48,7 +50,13 @@ func _process(delta: float) -> void:
 
 func screen_exited() -> void:
 	position.x = spawnPosition.x
-	spawnCactus()
+	if original:
+		spawnCactus()
+	else:
+		move = false
+		await mainSpawner.enteredScreen
+		move= true
+		spawnCactus()
 
 func updateSpeed(tempspeed:float):
 	speed = tempspeed
@@ -65,5 +73,17 @@ func _on_game_restart() -> void:
 func _on_game_game_start() -> void:
 	startingDelay.start()
 	await startingDelay.timeout
-	move = true
-	spawnCactus()
+	if original:
+		move = true
+		spawnCactus()
+	else:
+		print("prewait")
+		await mainSpawner.enteredScreen
+		print("otherscreenentered")
+		move = true
+		spawnCactus()
+
+
+func _screen_entered() -> void:
+	
+	enteredScreen.emit()

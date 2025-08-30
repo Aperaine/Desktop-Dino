@@ -384,8 +384,13 @@ offset_bottom = 17.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Cactus Spawner" parent="Gameplay/Right Alignment" instance=ExtResource("7_j5wjh")]
+[node name="Cactus Spawner" parent="Gameplay/Right Alignment" node_paths=PackedStringArray("mainSpawner") instance=ExtResource("7_j5wjh")]
 position = Vector2(128, -151.5)
+mainSpawner = NodePath(".")
+
+[node name="Cactus Spawner2" parent="Gameplay/Right Alignment" node_paths=PackedStringArray("mainSpawner") instance=ExtResource("7_j5wjh")]
+position = Vector2(720, -151.5)
+mainSpawner = NodePath("../Cactus Spawner")
 
 [node name="Cursor" parent="." instance=ExtResource("6_eow3j")]
 unique_name_in_owner = true
@@ -406,12 +411,15 @@ vertical_alignment = 2
 script = ExtResource("10_hve3p")
 
 [node name="RestartTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [connection signal="gameStart" from="." to="Gameplay/Ground" method="_on_game_game_start"]
 [connection signal="gameStart" from="." to="Gameplay/Right Alignment/Cactus Spawner" method="_on_game_game_start"]
+[connection signal="gameStart" from="." to="Gameplay/Right Alignment/Cactus Spawner2" method="_on_game_game_start"]
 [connection signal="gameStart" from="." to="Score" method="_on_game_start"]
 [connection signal="restart" from="." to="Gameplay/Ground" method="_on_game_restart"]
 [connection signal="restart" from="." to="Gameplay/Right Alignment/Cactus Spawner" method="_on_game_restart"]
+[connection signal="restart" from="." to="Gameplay/Right Alignment/Cactus Spawner2" method="_on_game_restart"]
 [connection signal="restart" from="." to="Score" method="_on_game_restart"]
 [connection signal="nextIteration" from="Gameplay/Ground/Ground" to="Gameplay/Ground" method="_on_ground_next_iteration"]
