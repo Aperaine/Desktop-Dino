@@ -4,3 +4,4 @@ extends Node
 
 signal gameOver
 signal updateSpeed(speed:float)
+signal birdsAllowed

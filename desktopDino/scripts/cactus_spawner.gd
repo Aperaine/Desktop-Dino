@@ -14,6 +14,9 @@ var cactiArray:Array
 var original:bool
 var move:bool = false
 
+var secondCactusThreshold:float = 0.7
+var birdsAllowed:bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	original = self==mainSpawner
@@ -26,6 +29,11 @@ func _ready() -> void:
 		var resource := load(cactiDirectory.get_current_dir() + "/" + file)
 		cactiArray.append(resource)
 	#print(cactiArray)
+	
+	if original:
+		SignalBus.birdsAllowed.connect(birdsAreAllowed)
+	
+	randomize()
 
 func spawnCactus():
 	for child in get_children(false):
@@ -56,7 +64,13 @@ func screen_exited() -> void:
 		move = false
 		await mainSpawner.enteredScreen
 		move= true
-		spawnCactus()
+		
+		
+		var ranumber = randf()
+		print(ranumber)
+		if ranumber > secondCactusThreshold:
+			print(ranumber)
+			spawnCactus()
 
 func updateSpeed(tempspeed:float):
 	speed = tempspeed
@@ -71,6 +85,8 @@ func _on_game_restart() -> void:
 
 
 func _on_game_game_start() -> void:
+	birdsAllowed=false
+	
 	startingDelay.start()
 	await startingDelay.timeout
 	if original:
@@ -79,9 +95,15 @@ func _on_game_game_start() -> void:
 	else:
 		await mainSpawner.enteredScreen
 		move = true
-		spawnCactus()
+		var ranumber = randf()
+		print(ranumber)
+		if ranumber > secondCactusThreshold :
+			spawnCactus()
 
 
 func _screen_entered() -> void:
 	
 	enteredScreen.emit()
+
+func birdsAreAllowed():
+	birdsAllowed = true

@@ -8,6 +8,8 @@ const pulse := "[pulse freq=10 color=gold ease=1]"
 var scoreEffect = ""
 var config = ConfigFile.new()
 
+@onready var birdsAllowed = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	modulate = Color.TRANSPARENT
@@ -29,6 +31,9 @@ func _process(delta: float) -> void:
 	else:
 		scoreEffect = ""
 		setScore()
+	
+	if score >= 300 && !birdsAllowed:
+		SignalBus.birdsAllowed.emit()
 
 func setScore():
 	var tempText = "[color=gray]HI %s [color=white]%s%s "# % returnStringWithZeroes(high)#,returnStringWithZeroes(score),scoreEffect
@@ -50,6 +55,7 @@ func returnStringWithZeroes(num:int):
 
 
 func _on_game_start() -> void:
+	birdsAllowed = false
 	set_process(true)
 	
 	var tween = create_tween()
