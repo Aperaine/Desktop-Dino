@@ -481,7 +481,7 @@ states/Jump/position = Vector2(541.5, -27.5)
 states/Run/node = SubResource("AnimationNodeAnimation_focm0")
 states/Run/position = Vector2(542.375, 82.6407)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_mdm24"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_4s6ie"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_ybb2o"), "Run", "Crouch", SubResource("AnimationNodeStateMachineTransition_qwydg"), "Crouch", "Run", SubResource("AnimationNodeStateMachineTransition_focm0"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_qwosw"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_x81ab"), "Jump", "Hurt", SubResource("AnimationNodeStateMachineTransition_i6h6m"), "Crouch", "Hurt", SubResource("AnimationNodeStateMachineTransition_xq1gb"), "Crouch", "Crouch Jump", SubResource("AnimationNodeStateMachineTransition_x4lh8"), "Crouch Jump", "Crouch", SubResource("AnimationNodeStateMachineTransition_lffyj"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_7mjhv")]
-graph_offset = Vector2(206.061, -31.9369)
+graph_offset = Vector2(85.911, -155.537)
 
 [node name="Dino" type="CharacterBody2D"]
 z_index = 5
@@ -509,4 +509,5 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/run = false
 
 [node name="Area2D" parent="." instance=ExtResource("3_ybb2o")]
+visible = false
 scale = Vector2(0.25, 0.25)

@@ -43,6 +43,7 @@ func death():
 	set_physics_process(false)
 
 func movement():
+	print(position.y)
 	
 	# Handle jump.
 	if Input.is_action_pressed("jump") and is_on_floor():

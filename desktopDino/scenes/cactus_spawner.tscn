@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1jq3g6matats"]
+[gd_scene load_steps=3 format=3 uid="uid://b1jq3g6matats"]
 
 [ext_resource type="Script" uid="uid://y3blcmvkby82" path="res://scripts/cactus_spawner.gd" id="1_h4p5c"]
+[ext_resource type="PackedScene" uid="uid://d07x3dpop6ecj" path="res://scenes/bird.tscn" id="2_5fvd1"]
 
 [node name="Cactus Spawner" type="Node2D" node_paths=PackedStringArray("startingDelay")]
 script = ExtResource("1_h4p5c")
 dirPath = "res://scenes/cacti/"
 startingDelay = NodePath("StartingDelay")
+birdFile = ExtResource("2_5fvd1")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(49.5, -40)

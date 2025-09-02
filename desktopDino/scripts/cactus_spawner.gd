@@ -6,6 +6,7 @@ signal enteredScreen
 @export var speed:float = 0
 @export var startingDelay : Timer
 @export var mainSpawner : Node2D
+@export var birdFile : PackedScene
 
 @onready var cactiDirectory = DirAccess.open(dirPath)
 @onready var spawnPosition = position
@@ -67,9 +68,8 @@ func screen_exited() -> void:
 		
 		
 		var ranumber = randf()
-		print(ranumber)
+		#print(ranumber)
 		if ranumber > secondCactusThreshold:
-			print(ranumber)
 			spawnCactus()
 
 func updateSpeed(tempspeed:float):
@@ -96,7 +96,7 @@ func _on_game_game_start() -> void:
 		await mainSpawner.enteredScreen
 		move = true
 		var ranumber = randf()
-		print(ranumber)
+		#print(ranumber)
 		if ranumber > secondCactusThreshold :
 			spawnCactus()
 
