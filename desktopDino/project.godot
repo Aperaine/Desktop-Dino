@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Desktop Dino"
+config/description="Play an HD variation of the Chrome Dino game, right on your desktop!"
 run/main_scene="uid://cooikcw0lvux7"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://dwnxcbbu4axt6"
 
 [autoload]
 
