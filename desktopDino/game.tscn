@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cooikcw0lvux7"]
+[gd_scene load_steps=16 format=4 uid="uid://cooikcw0lvux7"]
 
 [ext_resource type="Script" uid="uid://cqfdpbu7hrr8n" path="res://scripts/game.gd" id="1_e2o6t"]
 [ext_resource type="FontFile" uid="uid://20xyyl321jur" path="res://assets/PressStart2P-Regular.ttf" id="1_vef74"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bswjo83bmaaoh" path="res://scenes/cursor.tscn" id="6_eow3j"]
 [ext_resource type="PackedScene" uid="uid://b1jq3g6matats" path="res://scenes/cactus_spawner.tscn" id="7_j5wjh"]
 [ext_resource type="Script" uid="uid://dirh61ke81wel" path="res://score.gd" id="10_hve3p"]
+[ext_resource type="AudioStream" uid="uid://bw67ekhsv5ko3" path="res://assets/Sounds/death.mp3" id="11_mfdv2"]
+[ext_resource type="AudioStream" uid="uid://cfj75yd7g5q6f" path="res://assets/Sounds/100points.mp3" id="12_iotsf"]
 
 [sub_resource type="Theme" id="Theme_hve3p"]
 default_font = ExtResource("1_vef74")
@@ -322,7 +324,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
 
-[node name="Game" type="Control" node_paths=PackedStringArray("ground", "dino", "scoreDisplay", "restartTimer")]
+[node name="Game" type="Control" node_paths=PackedStringArray("ground", "dino", "scoreDisplay", "restartTimer", "deathSFX")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -335,6 +337,7 @@ ground = NodePath("Gameplay/Ground")
 dino = NodePath("Gameplay/Dino/Dino")
 scoreDisplay = NodePath("Score")
 restartTimer = NodePath("RestartTimer")
+deathSFX = NodePath("DeathSFX")
 
 [node name="Gameplay" type="Control" parent="."]
 layout_mode = 1
@@ -397,7 +400,7 @@ mainSpawner = NodePath("../Cactus Spawner")
 unique_name_in_owner = true
 visible = false
 
-[node name="Score" type="RichTextLabel" parent="."]
+[node name="Score" type="RichTextLabel" parent="." node_paths=PackedStringArray("pointsSFX")]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 offset_left = 542.0
@@ -411,10 +414,18 @@ fit_content = true
 horizontal_alignment = 2
 vertical_alignment = 2
 script = ExtResource("10_hve3p")
+pointsSFX = NodePath("../PointsSFX")
 
 [node name="RestartTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_mfdv2")
+
+[node name="PointsSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_iotsf")
+volume_db = -8.0
 
 [connection signal="gameStart" from="." to="Gameplay/Ground" method="_on_game_game_start"]
 [connection signal="gameStart" from="." to="Gameplay/Right Alignment/Cactus Spawner" method="_on_game_game_start"]

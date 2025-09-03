@@ -4,6 +4,7 @@ const pulse := "[pulse freq=10 color=gold ease=1]"
 
 @export var score :float = 0
 @export var high : int = 0
+@export var pointsSFX : AudioStreamPlayer
 
 var scoreEffect = ""
 var config = ConfigFile.new()
@@ -28,6 +29,7 @@ func _process(delta: float) -> void:
 	if int(score) % 100 < 10 && score >= 100:
 		if scoreEffect != pulse:
 			scoreEffect = pulse
+			pointsSFX.play()
 			setScore()
 	else:
 		scoreEffect = ""

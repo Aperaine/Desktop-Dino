@@ -12,6 +12,7 @@ signal restart
 @export var speed:float
 @export var scoreDisplay:RichTextLabel
 @export var restartTimer:Timer
+@export var deathSFX:AudioStreamPlayer
 
 
 const STARTINGSPEED:int = 700
@@ -85,6 +86,8 @@ func gameOver():
 	
 	scoreDisplay.set_process(false)
 	scoreDisplay.updateHigh()
+	
+	deathSFX.play()
 	
 
 func newGame():

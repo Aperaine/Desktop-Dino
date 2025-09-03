@@ -1,8 +1,9 @@
-[gd_scene load_steps=33 format=3 uid="uid://bchimt37lqwtg"]
+[gd_scene load_steps=34 format=3 uid="uid://bchimt37lqwtg"]
 
 [ext_resource type="Script" uid="uid://dfhbov27jbq0r" path="res://scripts/dino.gd" id="1_4s6ie"]
 [ext_resource type="Texture2D" uid="uid://dhtc3yrquvyw" path="res://assets/dinos/DinoSprites - tard.png" id="1_j5dwh"]
 [ext_resource type="PackedScene" uid="uid://c015ap5pbhg8j" path="res://scenes/clickZone.tscn" id="3_ybb2o"]
+[ext_resource type="AudioStream" uid="uid://b6oebcw14uqct" path="res://assets/Sounds/jump.mp3" id="4_qwydg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4s6ie"]
 atlas = ExtResource("1_j5dwh")
@@ -483,11 +484,12 @@ states/Run/position = Vector2(542.375, 82.6407)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_mdm24"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_4s6ie"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_ybb2o"), "Run", "Crouch", SubResource("AnimationNodeStateMachineTransition_qwydg"), "Crouch", "Run", SubResource("AnimationNodeStateMachineTransition_focm0"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_qwosw"), "Run", "Hurt", SubResource("AnimationNodeStateMachineTransition_x81ab"), "Jump", "Hurt", SubResource("AnimationNodeStateMachineTransition_i6h6m"), "Crouch", "Hurt", SubResource("AnimationNodeStateMachineTransition_xq1gb"), "Crouch", "Crouch Jump", SubResource("AnimationNodeStateMachineTransition_x4lh8"), "Crouch Jump", "Crouch", SubResource("AnimationNodeStateMachineTransition_lffyj"), "Hurt", "Idle", SubResource("AnimationNodeStateMachineTransition_7mjhv")]
 graph_offset = Vector2(85.911, -155.537)
 
-[node name="Dino" type="CharacterBody2D"]
+[node name="Dino" type="CharacterBody2D" node_paths=PackedStringArray("jumpSFX")]
 z_index = 5
 collision_layer = 9
 platform_floor_layers = 4294901760
 script = ExtResource("1_4s6ie")
+jumpSFX = NodePath("AudioStreamPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_4s6ie")
@@ -511,3 +513,6 @@ parameters/conditions/run = false
 [node name="Area2D" parent="." instance=ExtResource("3_ybb2o")]
 visible = false
 scale = Vector2(0.25, 0.25)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qwydg")

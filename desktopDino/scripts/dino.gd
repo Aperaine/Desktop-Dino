@@ -9,9 +9,9 @@ const GRAVITY_MULTIPLIER = 5
 var gravityCurrentMultiplier : int = 0
 
 @export var movementAllowed:=false
-
 @export var crouch := false
 @export var hurt := false
+@export var jumpSFX : AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -36,6 +36,8 @@ func jump() -> void:
 	animation_tree.set("parameters/conditions/run", true)
 	
 	velocity.y = JUMP_VELOCITY
+	
+	jumpSFX.play()
 
 func death():
 	animation_tree.set("parameters/conditions/run", false)
