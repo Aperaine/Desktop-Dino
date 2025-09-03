@@ -2,8 +2,8 @@ extends RichTextLabel
 
 const pulse := "[pulse freq=10 color=gold ease=1]"
 
-@export var score :float = 0
-@export var high := 0
+@export var score :int = 0
+@export var high : int = 0
 
 var scoreEffect = ""
 var config = ConfigFile.new()
