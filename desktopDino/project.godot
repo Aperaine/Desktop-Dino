@@ -37,6 +37,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/per_pixel_transparency/allowed=true
 
+[editor]
+
+movie_writer/movie_file="/Users/gadi/Movies/dinoDesktop.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
