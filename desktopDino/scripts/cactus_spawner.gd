@@ -31,7 +31,11 @@ func _ready() -> void:
 	
 	cactiDirectory.list_dir_begin()
 	for file: String in cactiDirectory.get_files():
-		var resource := load(cactiDirectory.get_current_dir() + "/" + file)
+		var resource := load(
+			(
+				cactiDirectory.get_current_dir() + "/" + file
+			).trim_suffix(".remap")
+			)
 		cactiArray.append(resource)
 	#print(cactiArray)
 	
