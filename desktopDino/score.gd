@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 		scoreEffect = ""
 		setScore()
 	
-	if score >= 400 && !birdsAllowed:
+	if score >= 300 && !birdsAllowed:
 		SignalBus.birdsAllowed.emit()
 		birdsAllowed = true
 
