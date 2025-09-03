@@ -2,7 +2,7 @@ extends RichTextLabel
 
 const pulse := "[pulse freq=10 color=gold ease=1]"
 
-@export var score :int = 0
+@export var score :float = 0
 @export var high : int = 0
 
 var scoreEffect = ""
@@ -23,6 +23,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
 	score += 10 * delta
 	if int(score) % 100 < 10 && score >= 100:
 		if scoreEffect != pulse:
