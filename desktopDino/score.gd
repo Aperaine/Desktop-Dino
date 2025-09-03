@@ -32,8 +32,9 @@ func _process(delta: float) -> void:
 		scoreEffect = ""
 		setScore()
 	
-	if score >= 300 && !birdsAllowed:
+	if score >= 400 && !birdsAllowed:
 		SignalBus.birdsAllowed.emit()
+		birdsAllowed = true
 
 func setScore():
 	var tempText = "[color=gray]HI %s [color=white]%s%s "# % returnStringWithZeroes(high)#,returnStringWithZeroes(score),scoreEffect

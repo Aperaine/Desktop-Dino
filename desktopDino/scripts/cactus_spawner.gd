@@ -16,7 +16,11 @@ var original:bool
 var move:bool = false
 
 var secondCactusThreshold:float = 0.7
+var birdThreshold:float = 0.3
 var birdsAllowed:bool = false
+var birdSpawnY : Array = [-178,-229,-280,-331]
+
+var birdSpeedMultiplier : float = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,12 +35,15 @@ func _ready() -> void:
 		cactiArray.append(resource)
 	#print(cactiArray)
 	
-	if original:
-		SignalBus.birdsAllowed.connect(birdsAreAllowed)
+	if !original:
+		SignalBus.connect("birdsAllowed",birdsAreAllowed)
 	
 	randomize()
 
 func spawnCactus():
+	birdSpeedMultiplier = 1
+	position = spawnPosition
+	
 	for child in get_children(false):
 		if child is Area2D:
 			child.queue_free()
@@ -50,11 +57,23 @@ func spawnCactus():
 		).instantiate()
 	
 	add_child(cactus)
+
+func spawnBird():
+	position.y = birdSpawnY.pick_random()
 	
+	birdSpeedMultiplier = randf_range(1.05,1.2)
+	for child in get_children(false):
+		if child is Area2D:
+			child.queue_free()
+	
+	var bird = birdFile.instantiate()
+	add_child(bird)
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if move:
-		position.x -= speed * delta
+		position.x -= speed * delta * birdSpeedMultiplier
 
 
 func screen_exited() -> void:
@@ -69,7 +88,10 @@ func screen_exited() -> void:
 		
 		var ranumber = randf()
 		#print(ranumber)
-		if ranumber > secondCactusThreshold:
+		if ranumber < birdThreshold && birdsAllowed:
+			spawnBird()
+			#print("birdSpawn")
+		elif ranumber > secondCactusThreshold:
 			spawnCactus()
 
 func updateSpeed(tempspeed:float):
@@ -82,10 +104,13 @@ func _on_game_restart() -> void:
 			child.queue_free()
 	move = false
 	position = spawnPosition
+	
+	birdsAllowed = false
 
 
 func _on_game_game_start() -> void:
 	birdsAllowed=false
+	birdSpeedMultiplier = 1
 	
 	startingDelay.start()
 	await startingDelay.timeout
@@ -96,8 +121,11 @@ func _on_game_game_start() -> void:
 		await mainSpawner.enteredScreen
 		move = true
 		var ranumber = randf()
-		#print(ranumber)
-		if ranumber > secondCactusThreshold :
+		
+		if ranumber < birdThreshold && birdsAllowed:
+			spawnBird()
+			#print("birdSpawn")
+		elif ranumber > secondCactusThreshold:
 			spawnCactus()
 
 
@@ -107,3 +135,4 @@ func _screen_entered() -> void:
 
 func birdsAreAllowed():
 	birdsAllowed = true
+	print("birdsallowed")
