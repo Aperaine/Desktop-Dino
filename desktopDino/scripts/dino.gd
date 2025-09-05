@@ -46,9 +46,9 @@ func death():
 
 func movement():
 	# Handle jump.
-	if Input.is_action_pressed("jump") and is_on_floor():
+	if (Input.is_action_pressed("jump") or Input.is_action_just_pressed("jump")) and is_on_floor():
 		jump()
 	
-	crouch = Input.is_action_pressed("crouch")
+	crouch = Input.is_action_pressed("crouch") or Input.is_action_just_pressed("crouch")
 	
 	gravityCurrentMultiplier = 5 ** int(crouch)
