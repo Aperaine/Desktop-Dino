@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://cooikcw0lvux7"]
+[gd_scene load_steps=17 format=4 uid="uid://cooikcw0lvux7"]
 
 [ext_resource type="Script" uid="uid://cqfdpbu7hrr8n" path="res://scripts/game.gd" id="1_e2o6t"]
 [ext_resource type="FontFile" uid="uid://20xyyl321jur" path="res://assets/PressStart2P-Regular.ttf" id="1_vef74"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dirh61ke81wel" path="res://score.gd" id="10_hve3p"]
 [ext_resource type="AudioStream" uid="uid://bw67ekhsv5ko3" path="res://assets/Sounds/death.mp3" id="11_mfdv2"]
 [ext_resource type="AudioStream" uid="uid://cfj75yd7g5q6f" path="res://assets/Sounds/100points.mp3" id="12_iotsf"]
+[ext_resource type="Texture2D" uid="uid://b36butoirpeqv" path="res://assets/html Wallpaper.png" id="13_lc2xo"]
 
 [sub_resource type="Theme" id="Theme_hve3p"]
 default_font = ExtResource("1_vef74")
@@ -324,7 +325,7 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
 
-[node name="Game" type="Control" node_paths=PackedStringArray("ground", "dino", "scoreDisplay", "restartTimer", "deathSFX")]
+[node name="Game" type="Control" node_paths=PackedStringArray("ground", "dino", "scoreDisplay", "restartTimer", "deathSFX", "htmlWallpaper")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -338,6 +339,7 @@ dino = NodePath("Gameplay/Dino/Dino")
 scoreDisplay = NodePath("Score")
 restartTimer = NodePath("RestartTimer")
 deathSFX = NodePath("DeathSFX")
+htmlWallpaper = NodePath("htmlBackground")
 
 [node name="Gameplay" type="Control" parent="."]
 layout_mode = 1
@@ -426,6 +428,18 @@ stream = ExtResource("11_mfdv2")
 [node name="PointsSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_iotsf")
 volume_db = -8.0
+
+[node name="htmlBackground" type="TextureRect" parent="."]
+visible = false
+z_index = -10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_lc2xo")
+expand_mode = 3
 
 [connection signal="gameStart" from="." to="Gameplay/Ground" method="_on_game_game_start"]
 [connection signal="gameStart" from="." to="Gameplay/Right Alignment/Cactus Spawner" method="_on_game_game_start"]

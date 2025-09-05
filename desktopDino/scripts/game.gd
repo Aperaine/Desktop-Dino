@@ -13,6 +13,7 @@ signal restart
 @export var scoreDisplay:RichTextLabel
 @export var restartTimer:Timer
 @export var deathSFX:AudioStreamPlayer
+@export var htmlWallpaper:TextureRect
 
 
 const STARTINGSPEED:int = 700
@@ -26,6 +27,8 @@ func _ready() -> void:
 	SignalBus.gameOver.connect(gameOver)
 	set_process(false)
 	notification(2016)
+	
+	htmlWallpaper.visible = OS.get_name() == "Web"
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
