@@ -110,6 +110,8 @@ func _on_game_restart() -> void:
 	position = spawnPosition
 	
 	birdsAllowed = false
+	
+	startingDelay.stop()
 
 
 func _on_game_game_start() -> void:
@@ -118,6 +120,7 @@ func _on_game_game_start() -> void:
 	
 	startingDelay.start()
 	await startingDelay.timeout
+	
 	if original:
 		move = true
 		spawnCactus()
