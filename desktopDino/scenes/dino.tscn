@@ -511,7 +511,6 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/run = false
 
 [node name="Area2D" parent="." instance=ExtResource("3_ybb2o")]
-visible = false
 scale = Vector2(0.25, 0.25)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -25,6 +25,7 @@ var projectRes := Vector2(1152,648)
 func _ready() -> void:
 	SignalBus.gameOver.connect(gameOver)
 	set_process(false)
+	notification(2016)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,12 +36,18 @@ func _process(delta: float) -> void:
 func _notification(what: int):
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_APPLICATION_PAUSED:
 		print("unfocused")
+		Engine.max_fps = 10
+		
+		
 		if !running:
 			newGame()
 		else:
 			SignalBus.gameOver.emit()
 			await get_tree().create_timer(0.01).timeout
 			newGame()
+	elif what == NOTIFICATION_APPLICATION_FOCUS_IN or what == NOTIFICATION_APPLICATION_RESUMED:
+		print("focused")
+		Engine.max_fps = 60
 
 
 func _input(_event: InputEvent) -> void:

@@ -14,6 +14,7 @@ config/name="Desktop Dino"
 config/description="Play an HD variation of the Chrome Dino game, right on your desktop!"
 run/main_scene="uid://cooikcw0lvux7"
 config/features=PackedStringArray("4.4", "Forward Plus")
+run/max_fps=5
 boot_splash/bg_color=Color(0.14, 0.14, 0.14, 0)
 boot_splash/fullsize=false
 boot_splash/image="uid://d207r34aet2qy"
@@ -74,5 +75,7 @@ crouch={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=3
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 viewport/transparent_background=true
