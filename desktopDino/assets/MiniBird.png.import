@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cavml57nkkg7a"
-path="res://.godot/imported/MiniBird [Wood].png-41a3b9ab8dd096cee5f0969c413888be.ctex"
+path="res://.godot/imported/MiniBird.png-773c919fcae17ef1154a278c6ba195e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/MiniBird [Wood].png"
-dest_files=["res://.godot/imported/MiniBird [Wood].png-41a3b9ab8dd096cee5f0969c413888be.ctex"]
+source_file="res://assets/MiniBird.png"
+dest_files=["res://.godot/imported/MiniBird.png-773c919fcae17ef1154a278c6ba195e7.ctex"]
 
 [params]
 

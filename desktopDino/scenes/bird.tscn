@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://d07x3dpop6ecj"]
 
 [ext_resource type="Script" uid="uid://de28sjvun3u1q" path="res://scripts/killzone.gd" id="1_l081p"]
-[ext_resource type="Texture2D" uid="uid://cavml57nkkg7a" path="res://assets/MiniBird [Wood].png" id="2_3po83"]
+[ext_resource type="Texture2D" uid="uid://cavml57nkkg7a" path="res://assets/MiniBird.png" id="2_3po83"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hq4t0"]
 atlas = ExtResource("2_3po83")

@@ -15,8 +15,8 @@ var cactiArray:Array
 var original:bool
 var move:bool = false
 
-var secondCactusThreshold:float = 0.7
-var birdThreshold:float = 0.3
+var secondCactusThreshold:float = 0.8
+var birdThreshold:float = 0.4
 var birdsAllowed:bool = false
 var birdSpawnY : Array = [-178,-229,-280,-331]
 
@@ -95,7 +95,7 @@ func screen_exited() -> void:
 		if ranumber < birdThreshold && birdsAllowed:
 			spawnBird()
 			#print("birdSpawn")
-		elif ranumber > secondCactusThreshold:
+		elif ranumber >= secondCactusThreshold:
 			spawnCactus()
 
 func updateSpeed(tempspeed:float):
